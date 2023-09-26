@@ -1,0 +1,147 @@
+[gd_scene load_steps=9 format=3 uid="uid://cjrb0kc0rogjt"]
+
+[ext_resource type="Texture2D" uid="uid://f3fvpb3fud4j" path="res://Sprites/ball.png" id="1_aerxl"]
+[ext_resource type="Texture2D" uid="uid://cx6x21x3dprxy" path="res://Sprites/Brick2.png" id="2_0sqra"]
+[ext_resource type="Script" path="res://Scripts/Brick.gd" id="2_kf4n6"]
+[ext_resource type="Texture2D" uid="uid://un5wquqb7l64" path="res://Sprites/Brick.png" id="3_n0uj8"]
+[ext_resource type="Script" path="res://Scripts/Ball.gd" id="3_uhwc8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i0cli"]
+size = Vector2(74, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ph877"]
+radius = 38.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_daple"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Brick2" type="CharacterBody2D" parent="."]
+position = Vector2(250, 20)
+motion_mode = 1
+script = ExtResource("2_kf4n6")
+player = 1
+
+[node name="Brick_Sprite" type="Sprite2D" parent="Brick2"]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_0sqra")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Brick2"]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_i0cli")
+
+[node name="Brick" type="CharacterBody2D" parent="."]
+position = Vector2(250, 480)
+motion_mode = 1
+script = ExtResource("2_kf4n6")
+
+[node name="Brick_Sprite" type="Sprite2D" parent="Brick"]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_n0uj8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Brick"]
+shape = SubResource("RectangleShape2D_i0cli")
+
+[node name="Ball" type="CharacterBody2D" parent="."]
+position = Vector2(250, 250)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("3_uhwc8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_ph877")
+
+[node name="Ball_Sprite" type="Sprite2D" parent="Ball"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_aerxl")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Ball"]
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="Wall_left" type="StaticBody2D" parent="Walls"]
+position = Vector2(10, 250)
+
+[node name="ColorRect" type="ColorRect" parent="Walls/Wall_left"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -250.0
+offset_right = 10.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4, 0.231373, 0.172549, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall_left"]
+scale = Vector2(1, 25)
+shape = SubResource("RectangleShape2D_daple")
+
+[node name="Wall_right" type="StaticBody2D" parent="Walls"]
+position = Vector2(490, 250)
+
+[node name="ColorRect" type="ColorRect" parent="Walls/Wall_right"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -250.0
+offset_right = 10.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4, 0.231373, 0.172549, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall_right"]
+scale = Vector2(1, 25)
+shape = SubResource("RectangleShape2D_daple")
+
+[node name="Net" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 50.0
+offset_top = 249.0
+offset_right = 450.0
+offset_bottom = 251.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 420.0
+offset_top = 250.0
+offset_right = 420.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Score_player_up" type="Label" parent="Control"]
+layout_mode = 0
+offset_top = -50.0
+offset_right = 10.0
+offset_bottom = -24.0
+scale = Vector2(2, 2)
+text = "-1
+"
+horizontal_alignment = 3
+vertical_alignment = 3
+
+[node name="Score_player_down" type="Label" parent="Control"]
+layout_mode = 0
+offset_right = 10.0
+offset_bottom = 26.0
+scale = Vector2(2, 2)
+text = "0"
+horizontal_alignment = 3
+vertical_alignment = 3
